@@ -43,20 +43,12 @@ exports.up = function(knex) {
         .inTable("resources")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-      tbl
-        .integer("task_id")
-        .notNullable()
-        .unsigned()
-        .references("id")
-        .inTable("tasks")
-        .onUpdate("CASCADE")
-        .onDelete("CASCADE");
     });
 };
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists("junction")
     .dropTableIfExists("tasks")
     .dropTableIfExists("resources")
-    .dropTableIfExists("junction")
     .dropTableIfExists("projects");
 };
